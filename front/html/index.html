@@ -3,44 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre del juego</title>
+    <title>Preguntados Maquillaje</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <main>
-        <div>
-            <img src="images/principal.png" alt="">
-        </div>
-        <div>
-            <h1>Nombre del juego</h1>
-            <a href="categorias.html" target="_self"><button onclick="">Jugar</button></a>
-        </div>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <legend>Inicie sesión</legend>
+        <section class="principal">
+            <img src="images/principal.png" alt="Imágen principal del juego">
+        </section>
+         <section class="intro-juego">
+            <header>
+                <h1>Preguntados Maquillaje</h1>
+            </header>
+            <div class="boton-juego">
+                <a href="categorias.html" target="_self"><button onclick="">Comenzar</button></a>
+            </div>
+
+        <section class="acceso shadow p-3 mb-5 bg-white rounded">
+            <legend>Iniciar sesión</legend>
             <div class="form-floating mb-3">
-                <input type="mail" class="form-control" id="email" placeholder="nombre@example.com">
+                <input type="mail" class="form-control" id="userMail" placeholder="nombre@example.com">
                 <label for="email">Correo electrónico</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" placeholder="********">
+                <input type="password" class="form-control" id="userPassword" placeholder="********">
                 <label for="password">Contraseña</label>
             </div>
             <div class="mb-3 d-flex justify-content-end">
                 <button class="btn btn-success me-2" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Iniciar sesión">Iniciar sesión</button>
             </div>
-        </div>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <legend>Si no tiene cuenta, registrese.</legend>
+        </section>
+
+        <section class="shadow p-3 mb-5 bg-white rounded">
+            <legend>Si no tiene cuenta, por favor registrese.</legend>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" placeholder="nombre">
                 <label for="username">Nombre de usuario</label>
             </div>
             <div class="mb-3 d-flex justify-content-end">
-                <button class="btn btn-danger" onclick="registrar()" data-bs-toggle="tooltip" data-bs-placement="top"
+                <button class="btn btn-danger" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Registrarse">Registrarse</button>
-            </div>
         </div>
+    </section>
     </main>
 </body>
 </html>
