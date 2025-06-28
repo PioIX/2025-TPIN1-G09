@@ -1,0 +1,112 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: #ebd0da;
+    color: #333;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.principal img {
+    max-width: 600px;
+    width: 200%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.intro-juego {
+    max-width: 450px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.intro-juego h1 {
+    font-size: 2.5em;
+    color: #e07aa5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.boton-juego {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.boton-juego button {
+    background-color: #f49ac2;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-juego button:hover {
+    background-color: #e07aa5;
+}
+
+section.acceso, section.shadow {
+    background-color: #fff0f5;
+    border: 1px solid #fddde6;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+legend {
+    font-weight: bold;
+    color: #d06090;
+    margin-bottom: 10px;
+}
+
+.form-floating {
+    margin-bottom: 15px;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.btn-success, .btn-danger {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-success {
+    background-color: #b2e0b2;
+    color: #2b5e2b;
+}
+
+.btn-success:hover {
+    background-color: #8cd98c;
+}
+
+.btn-danger {
+    background-color: #f6a5a5;
+    color: #832121;
+}
+
+.btn-danger:hover {
+    background-color: #ec7c7c;
+}
+
