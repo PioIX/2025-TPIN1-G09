@@ -1,112 +1,264 @@
-
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    background-color: #ebd0da;
-    color: #333;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
 
 main {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    gap: 50px;
-    flex-wrap: wrap;
+    height: 100vh;
 }
 
-.principal img {
-    max-width: 600px;
-    width: 200%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+/* Lado izquierdo - Imagen */
+.content-right {
+    flex: 0 0 40%;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 50%, #ff80bf 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.content-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lado derecho - Formulario */
+.content-left {
+    flex: 0 0 60%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    overflow-y: auto;
 }
 
 .intro-juego {
-    max-width: 450px;
+    text-align: center;
+    margin-bottom: 30px;
     width: 100%;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .intro-juego h1 {
-    font-size: 2.5em;
-    color: #e07aa5;
+    color: #ff4da6;
+    font-size: 36px;
+    font-weight: bold;
     margin-bottom: 20px;
-    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .boton-juego {
-    text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .boton-juego button {
-    background-color: #f49ac2;
+    background: linear-gradient(45deg, #ff66b3, #ff4da6);
     color: white;
-    padding: 12px 30px;
-    font-size: 1.1em;
     border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
     border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 77, 166, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .boton-juego button:hover {
-    background-color: #e07aa5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 77, 166, 0.6);
+    background: linear-gradient(45deg, #ff4da6, #ff3399);
 }
 
-section.acceso, section.shadow {
-    background-color: #fff0f5;
-    border: 1px solid #fddde6;
-    padding: 20px;
+.boton-juego a {
+    text-decoration: none;
+}
+
+.login, .registro {
+    background: rgba(255, 182, 217, 0.2);
     border-radius: 15px;
-    margin-bottom: 25px;
-}
-
-legend {
-    font-weight: bold;
-    color: #d06090;
-    margin-bottom: 10px;
-}
-
-.form-floating {
-    margin-bottom: 15px;
-}
-
-input.form-control {
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 102, 179, 0.3);
     width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    max-width: 400px;
 }
 
-.btn-success, .btn-danger {
-    padding: 10px 20px;
-    border-radius: 20px;
+.login legend, .registro legend {
+    color: #cc0066;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ffb3d9;
+    border-radius: 10px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: #ff66b3;
+    box-shadow: 0 0 10px rgba(255, 102, 179, 0.3);
+    transform: scale(1.02);
+}
+
+.form-control::placeholder {
+    color: #cc0066;
+    opacity: 0.7;
+}
+
+.btn-ingresar, .btn-registrarse {
+    background: linear-gradient(45deg, #ff99cc, #ff66b3);
+    color: white;
     border: none;
-    font-size: 1em;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-ingresar:hover, .btn-registrarse:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(255, 102, 179, 0.4);
+    background: linear-gradient(45deg, #ff66b3, #ff4da6);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10% auto;
+    max-width: 500px;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(45deg, #ff99cc, #ff66b3);
+    color: white;
+    padding: 20px;
+    border-bottom: none;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    color: #333;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
 }
 
 .btn-success {
-    background-color: #b2e0b2;
-    color: #2b5e2b;
+    background: linear-gradient(45deg, #ff99cc, #ff66b3);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.btn-success:hover {
-    background-color: #8cd98c;
+/* Responsive */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+   
+    .content-right {
+        flex: 0 0 40%;
+    }
+   
+    .content-left {
+        flex: 1;
+        padding: 20px;
+    }
+   
+    .intro-juego h1 {
+        font-size: 28px;
+    }
+   
+    .content-right img {
+        max-width: 80%;
+        max-height: 80%;
+    }
 }
 
-.btn-danger {
-    background-color: #f6a5a5;
-    color: #832121;
+@media (max-width: 480px) {
+    .content-right {
+        flex: 0 0 35%;
+    }
+   
+    .intro-juego h1 {
+        font-size: 24px;
+    }
+   
+    .login, .registro {
+        padding: 20px;
+    }
+   
+    .boton-juego button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
 }
-
-.btn-danger:hover {
-    background-color: #ec7c7c;
-}
-
