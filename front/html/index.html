@@ -8,44 +8,56 @@
 </head>
 <body>
     <main>
-        <section class="principal">
+        <div class="content-right">
             <img src="../images/principal.png" alt="Imágen principal del juego">
-        </section>
-         <section class="intro-juego">
-            <header>
-                <h1>Preguntados Maquillaje</h1>
-            </header>
-            <div class="boton-juego">
-                <a href="../categorias.html" target="_self"><button onclick="">Comenzar</button></a>
-            </div>
-
-        <section class="acceso shadow p-3 mb-5 bg-white rounded">
-            <legend>Iniciar sesión</legend>
-            <div class="form-floating mb-3">
-                <input type="mail" class="form-control" id="usermail" placeholder="nombre@example.com">
-                <label for="usermail">Correo electrónico</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="userpassword" placeholder="********">
-                <label for="userpassword">Contraseña</label>
-            </div>
-            <div class="mb-3 d-flex justify-content-end">
-                <button class="btn btn-success me-2" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Iniciar sesión">Iniciar sesión</button>
-            </div>
-        </section>
-
-        <section class="shadow p-3 mb-5 bg-white rounded">
-            <legend>Si no tiene cuenta, por favor registrese.</legend>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="username" placeholder="nombre">
-                <label for="username">Nombre de usuario</label>
-            </div>
-            <div class="mb-3 d-flex justify-content-end">
-                <button class="btn btn-danger" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Registrarse">Registrarse</button>
         </div>
-    </section>
+        <div class="content-left">
+            <section class="intro-juego">
+                <h1>Preguntados Maquillaje</h1>
+                <div class="boton-juego">
+                    <a href="categorias.html" target="_self"><button onclick="">Comenzar</button></a>
+                </div>
+            </section>
+            <section class="login">
+                <legend>Iniciar sesión</legend>
+                <div>
+                    <input type="mail" class="form-control" id="ingresoMail" placeholder="Correo electrónico">
+                    <input type="password" class="form-control" id="ingresoContraseña" placeholder="Contraseña">
+                    <button class="btn-ingresar" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar sesión">Iniciar sesión</button>
+                </div>
+            </section>
+
+            <section class="registro">
+                <legend>Si no tiene cuenta, por favor registrese.</legend>
+                <div>
+                    <input type="text" class="form-control" id="ingresoNombreUsuario" placeholder="Nombre de usuario">
+                    <button class="btn-registrarse" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrarse">Registrarse</button>
+                </div>
+            </section>
+        </div>
+        
+        <div id="modal" class="modal fade" tabindex="-1" hidden>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalBody">Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">¡Listo!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+        <script> src="../dom.js"</script>
+        <script> src="../index.js"</script>
     </main>
 </body>
 </html>
