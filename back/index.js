@@ -4,7 +4,7 @@ var cors = require('cors');
 const { realizarQuery } = require('./modulos/mysql');
 
 var app = express(); //Inicializo express
-var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 3000
+var port = process.env.PORT || 4002; //Ejecuto el servidor en el puerto 3000
 
 // Convierte una petición recibida (POST-GET...) a objeto JSON
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,6 +15,10 @@ app.get('/', function (req, res) {
     res.status(200).send({
         message: 'GET Home route working fine!'
     });
+});
+
+app.listen(port, function () {
+    console.log(`Server running in http://localhost:${port}`);
 });
 
 app.get('/usuarios', async function (req, res) {
@@ -112,6 +116,9 @@ app.post('/respuestas', function (req, res) {
     res.send("Respuesta agregada")
 })
 
-app.listen(port, function () {
-    console.log(`Server running in http://localhost:${port}`);
-});
+
+app.post('/usuarioExiste', async function(req,res){
+    const response = await realizarQuery(`
+        
+    `)
+})

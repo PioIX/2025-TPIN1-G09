@@ -2,7 +2,7 @@ let idLogged = -1;
 
 async function existsUser(nombre, password) {
     try {
-        const respuesta = await fetch('http://localhost:4001/usuarioExiste', {
+        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -18,7 +18,7 @@ async function existsUser(nombre, password) {
 
 async function conseguirID(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4001/conseguirId', {
+        const respuesta = await fetch('http://localhost:4002/conseguirId', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -34,7 +34,7 @@ async function conseguirID(nombre) {
 
 async function esAdmin(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4001/esAdmin', {
+        const respuesta = await fetch('http://localhost:4002/esAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -105,7 +105,7 @@ async function nuevoUsuario(nombre, password) {
         if(result.length==0){
             console.log("Hola")
             let datos = await encontrarDatos(nombre, password)
-            const response = await fetch('http://localhost:4001/insertarUsuario', {
+            const response = await fetch('http://localhost:4002/insertarUsuario', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json",
