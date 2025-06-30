@@ -41,58 +41,101 @@ async function esAdmin(nombre) {
             },
             body: JSON.stringify({ usuario: nombre }),
         });
-        return await respuesta.json();
+        let result = await respuesta.json()
+        return result;
+        if (result.length>0) {
+            return result[0].es_admin;
+        } else {
+            return null;
+        }
     } catch (error) {
-        console.log("No se pudo verificar si es admin");
-        return 0;
+        console.log(error);
     }
 }
 
 async function ingresar() {
-    let nombre = ui.getNombreUsuario();
-    let password = ui.getContraseña();
-    let resultado = await existsUser(nombre, password);
-
-    if (resultado && resultado.length > 0) {
-        idLogged = await conseguirID(nombre);
-        let admin = await esAdmin(nombre);
-
-        if (admin > 0) {
-            console.log("Soy admin");
-            // ui.setUser(nombre);
-            // ui.changeScreenAdmin();
+    try {
+        let nombre = ui.getUser();
+        let password = ui.getPassword();
+        let resultado = await existsUser(nombre, password);
+        if (resultado.length > 0) {
+            idLogged = await conseguirID(nombre);
+            let admin = await esAdmin(nombre);
+            if (admin > 0) {
+                ui.clearLoginInputs()
+                console.log("Soy admin");
+                ui.showModal("Ingreso");
+                ui.setUser(nombre);
+                ui.changeScreenAdmin();
+            } else {
+                ui.clearLoginInputs()
+                console.log("No soy admin");
+                ui.showModal("Ingreso");
+                ui.changeScreen();
+            }
         } else {
-            console.log("No soy admin");
-            // ui.setUser(nombre);
-            // ui.changeScreen();
+            console.log("No ha podido ingresar al juego")
+            ui.clearLoginInputs();
+            ui.showModal("Usuario o contraseña incorrectos");
+            idLogged = -1;
         }
-    } else {
-        ui.showModal("Usuario o contraseña incorrectos");
-        idLogged = -1;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function encontrarDatos(nombre, password) {
+    try {
+        let datos = {
+            nombre_usuario: nombre,
+            contraseña: password,
+            mail: mail,
+        }
+        console.log(datos)
+        return datos
+    } catch(error){
+        console.log(error);
+    }
+}
+
+async function nuevoUsuario(nombre, password) {
+    try{
+        let result = await existsUser(nombre,password)
+        console.log(result)
+        if(result.length==0){
+            console.log("Hola")
+            let datos = await encontrarDatos(nombre, password)
+            const response = await fetch('http://localhost:4001/insertarUsuario', {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify(datos)
+            })
+            let result = await response.json()
+            console.log(result)
+            return 1;
+        } else {
+            return -1;
+        }
+    } catch(error) {
+        console.log(error)
     }
 }
 
 async function registrarse() {
-    let mail = ui.getMail();
-    let nombre = ui.getNombreUsuario();
-    let password = ui.getContraseña();
-
     try {
-        const respuesta = await fetch("http://localhost:4001/registrarUsuario", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ mail: mail, usuario: nombre, contraseña: password }),
-        });
-        const result = await respuesta.json();
-        if (result.success) {
+        let nombre = ui.getUser();
+        let password = ui.getPassword();
+        let created = await nuevoUsuario(nombre, password)
+        if (created>0) {
+            ui.clearLoginInputs()
             ui.showModal("Registro exitoso", "Ya podés iniciar sesión");
         } else {
-            ui.showModal("Error", "No se pudo registrar el usuario");
+            ui.clearLoginInputs()
+            ui.showModal("Error", "Usuario existente");
         }
     } catch (error) {
         console.log(error);
-        ui.showModal("Error", "Falló el registro");
     }
 }
