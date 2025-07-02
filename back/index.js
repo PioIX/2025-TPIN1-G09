@@ -74,7 +74,6 @@ app.get('/respuestas', async function (req, res) {
 app.post('/usuarios',async function (req, res) {
     console.log(req.body)
     try {
-        
         await realizarQuery(`
         INSERT INTO Usuarios (nombre_usuario,mail,contraseña,es_admin) VALUES
             ("${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}","false");
@@ -130,5 +129,17 @@ app.post('/usuarioExiste', async function(req,res){
         res.send({res: "El usuario no existe", ok:false})
     } else {
         res.send({res:"El mail ya fue usado", ok:true})
+    }
+})
+
+app.post('/esAdmin', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            SELECT es_admin FROM Usuarios WHERE mail = '${req.body.mail}'    
+        `)
+        console.log(respuesta)
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error)
     }
 })

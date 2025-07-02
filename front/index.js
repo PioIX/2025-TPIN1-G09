@@ -18,7 +18,7 @@ async function existsUser(nombre, password, mail) {
 
 async function conseguirID(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4002/conseguirId', {
+        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
