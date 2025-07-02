@@ -71,13 +71,18 @@ app.get('/respuestas', async function (req, res) {
     res.send(respuesta);
 })
 
-app.post('/usuarios', function (req, res) {
+app.post('/usuarios',async function (req, res) {
     console.log(req.body)
-    realizarQuery(`
-    INSERT INTO Usuarios ("id_usuario","nombre_usuario","mail","contraseña","es_admin") VALUES
-        (${req.body.id_usuario},"${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}","${req.body.es_admin}");
-    `)
-    res.send("Usuario agregado")
+    try {
+        
+        await realizarQuery(`
+        INSERT INTO Usuarios (nombre_usuario,mail,contraseña,es_admin) VALUES
+            ("${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}","false");
+        `)
+        res.send({res:"Usuario agregado"})
+    } catch (error) {
+        res.send({res:"No se pudo agregar el usuario"})
+    }
 })
 
 app.post('/partidas', function (req, res) {
@@ -118,7 +123,12 @@ app.post('/respuestas', function (req, res) {
 
 
 app.post('/usuarioExiste', async function(req,res){
-    const response = await realizarQuery(`
-        
-    `)
+    const response = await realizarQuery(
+        `SELECT mail FROM Usuarios WHERE mail = "${req.body.mail}"`
+    )
+    if (response.length == 0){
+        res.send({res: "El usuario no existe", ok:false})
+    } else {
+        res.send({res:"El mail ya fue usado", ok:true})
+    }
 })
