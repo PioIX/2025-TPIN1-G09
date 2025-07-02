@@ -1,0 +1,358 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e6979b 0%, #f3d0dd 50%, #f1a7a7 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+main {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    min-height: 400px;
+    position: relative;
+}
+
+main::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b9d, #f093fb, #ff9a9e);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* Título estilo del juego */
+main::after {
+    content: 'Panel de Administración';
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+/* Estilos del select principal */
+#categorias {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid #f8a5c2;
+    border-radius: 15px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23f8a5c2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+#categorias:focus {
+    border-color: #ff6b9d;
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    transform: translateY(-2px);
+}
+
+#categorias:hover {
+    border-color: #ff6b9d;
+    box-shadow: 0 5px 15px rgba(248, 165, 194, 0.2);
+}
+
+#categorias option {
+    padding: 12px;
+    font-weight: 500;
+    color: #666;
+}
+
+/* Contenedor de inputs dinámicos */
+#inputs {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos para inputs y elementos dinámicos */
+#inputs input,
+#inputs textarea,
+#inputs select {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border: 2px solid #f8a5c2;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+    background: white;
+    color: #666;
+}
+
+#inputs input::placeholder,
+#inputs textarea::placeholder {
+    color: #bbb;
+    font-style: italic;
+}
+
+#inputs input:focus,
+#inputs textarea:focus,
+#inputs select:focus {
+    border-color: #ff6b9d;
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    transform: translateY(-1px);
+}
+
+#inputs input:hover,
+#inputs textarea:hover,
+#inputs select:hover {
+    border-color: #ff6b9d;
+    box-shadow: 0 3px 10px rgba(248, 165, 194, 0.15);
+}
+
+#inputs textarea {
+    min-height: 100px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Labels estilo del juego */
+#inputs label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ff6b9d;
+    font-size: 14px;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+}
+
+/* Contenedor para grupos */
+#inputs .input-group {
+    margin-bottom: 25px;
+}
+
+#inputs .input-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Botones estilo del juego */
+#inputs button,
+#inputs input[type="submit"],
+#inputs input[type="button"] {
+    background: linear-gradient(45deg, #ff6b9d, #f093fb);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+#inputs button:hover,
+#inputs input[type="submit"]:hover,
+#inputs input[type="button"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+#inputs button:active,
+#inputs input[type="submit"]:active,
+#inputs input[type="button"]:active {
+    transform: translateY(-1px);
+}
+
+/* Botón secundario */
+#inputs .btn-secondary {
+    background: white;
+    color: #ff6b9d;
+    border: 2px solid #ff6b9d;
+}
+
+#inputs .btn-secondary:hover {
+    background: #ff6b9d;
+    color: white;
+}
+
+/* Checkboxes y radios estilo del juego */
+#inputs input[type="checkbox"],
+#inputs input[type="radio"] {
+    width: auto;
+    margin-right: 12px;
+    margin-bottom: 0;
+    accent-color: #ff6b9d;
+    transform: scale(1.3);
+}
+
+#inputs .checkbox-group,
+#inputs .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(248, 165, 194, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(248, 165, 194, 0.2);
+}
+
+#inputs .checkbox-group:hover,
+#inputs .radio-group:hover {
+    background: rgba(248, 165, 194, 0.1);
+}
+
+#inputs .checkbox-group label,
+#inputs .radio-group label {
+    margin-bottom: 0;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    cursor: pointer;
+    color: #666;
+}
+
+/* Mensajes de estado */
+#inputs .success-message {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+#inputs .error-message {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#inputs > * {
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* File inputs */
+#inputs input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #f8a5c2;
+    background: rgba(248, 165, 194, 0.05);
+    text-align: center;
+    cursor: pointer;
+}
+
+#inputs input[type="file"]:hover {
+    border-color: #ff6b9d;
+    background: rgba(248, 165, 194, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    main {
+        padding: 30px 25px;
+        border-radius: 15px;
+        max-width: 400px;
+    }
+    
+    main::after {
+        font-size: 12px;
+        padding: 6px 15px;
+    }
+    
+    #categorias {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+    
+    #inputs input,
+    #inputs textarea,
+    #inputs select {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 25px 20px;
+        margin: 10px;
+    }
+    
+    #categorias {
+        padding: 12px 14px;
+    }
+    
+    #inputs input,
+    #inputs textarea,
+    #inputs select {
+        padding: 10px 14px;
+    }
+    
+    #inputs button,
+    #inputs input[type="submit"],
+    #inputs input[type="button"] {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
