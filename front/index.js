@@ -139,3 +139,52 @@ async function registrarse() {
         console.log(error);
     }
 }
+
+////////////////////////////////
+//ADMIN HTML
+////////////////////////////////
+
+function mostrarInputs() { 
+    let valor = document.getElementById("categorias").value;
+    let div = ''
+    switch(valor) {
+        case "historia":
+            div += `<label>Agregue una pregunta</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 1</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 2</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 3</label>`
+            div += `<input type="text">`  
+            break;
+        case "geografia":
+            div += `<label>Agregue una pregunta</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 1</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 2</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 3</label>`
+            div += `<input type="text">` 
+            break;
+        case "aplicacion":
+            div += `<label>Agregue la URL de la imagen</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 1</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 2</label>`
+            div += `<input type="text">` 
+            div += `<label>Agregue la opción 3</label>`
+            div += `<input type="text">` 
+            break;
+        case "logos":
+        default:
+            div += `<label>Agregue la URL de la imagen</label>`
+            div += `<input type="text">`  
+        }
+
+        document.getElementById("inputs").innerHTML = ""
+        document.getElementById("inputs").innerHTML = div
+
+}
