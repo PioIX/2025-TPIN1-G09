@@ -74,8 +74,8 @@ app.get('/respuestas', async function (req, res) {
 app.post('/usuarios', function (req, res) {
     console.log(req.body)
     realizarQuery(`
-    INSERT INTO Usuarios ("id_usuario","nombre_usuario","mail","contraseña") VALUES
-        (${req.body.id_usuario},"${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}");
+    INSERT INTO Usuarios ("id_usuario","nombre_usuario","mail","contraseña","es_admin") VALUES
+        (${req.body.id_usuario},"${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}","${req.body.es_admin}");
     `)
     res.send("Usuario agregado")
 })
