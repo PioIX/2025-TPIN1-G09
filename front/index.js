@@ -2,7 +2,7 @@ let idLogged = -1;
 
 async function existsUser(nombre, password, mail) {
     try {
-        const respuesta = await fetch('http://localhost:4000/usuarioExiste', {
+        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,7 +22,7 @@ async function existsUser(nombre, password, mail) {
 
 async function conseguirID(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4000/usuarioExiste', {
+        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ async function conseguirID(nombre) {
 
 async function esAdmin(mail) {
     try {
-        const respuesta = await fetch('http://localhost:4000/esAdmin', {
+        const respuesta = await fetch('http://localhost:4002/esAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -117,34 +117,25 @@ async function nuevoUsuario(nombre, password, mail) {
         }
         let result = await existsUser(nombre,password, mail);
         console.log("Verificación usuario:", result);
-        if(result.ok==false && !result.error){//Esto significa q no existe el usuario
-            console.log("Creando nuevo usuario");
-            let datos = {
-                nombre_usuario: nombre,
-                contraseña: password,
-                mail: mail,
-            };
-            const response = await fetch('http://localhost:4000/usuarios', {
+        console.log(result)
+        if(result.ok==false){//Esto significa q no existe el usuario
+            console.log("Hola")
+            let datos = await encontrarDatos(nombre, password, mail)
+            const response = await fetch('http://localhost:4002/usuarios', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json",
                 },
                 body: JSON.stringify(datos)
             })
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
-            let resultado = await response.json();
-            console.log("Resultado creación: ", resultado);
+            let result = await response.json()
+            console.log(result)
             return 1;
-        } else if (result.ok === true){
-            return -1; //Usuario ya existe
         } else {
-            return 0;
+            return -1;
         }
     } catch(error) {
-        console.log(error);
-        return 0;
+        console.log(error)
     }
 }
 
@@ -153,20 +144,16 @@ async function registrarse() {
         let nombre = ui.getUser();
         let password = ui.getPassword();
         let mail = ui.getMail();
-        let created = await nuevoUsuario(nombre, password, mail);
+        let created = await nuevoUsuario(nombre, password, mail)
         if (created>0) {
             ui.clearLoginInputs()
             alert("Registro exitoso, inicie sesión");
-        } else if (created === -1){
-            ui.clearLoginInputs();
-            alert("Usuario existente, intente de nuevo");
         } else {
-            ui.clearLoginInputs();
-            alert("Error en el registro, intente de nuevo");
+            ui.clearLoginInputs()
+            alert("Usuario existente, intente de nuevo");
         }
     } catch (error) {
         console.log(error);
-        alert("Error inesperado durante el registro");
     }
 }
 
