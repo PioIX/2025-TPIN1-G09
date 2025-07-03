@@ -72,15 +72,16 @@ app.get('/respuestas', async function (req, res) {
 })
 
 app.post('/usuarios',async function (req, res) {
-    console.log(req.body)
+    console.log(req.body);
     try {
         await realizarQuery(`
-        INSERT INTO Usuarios (nombre_usuario,mail,contraseña,es_admin) VALUES
+        INSERT INTO Usuarios (nombre_usuario, mail, contraseña, es_admin) VALUES
             ("${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}","false");
-        `)
-        res.send({res:"Usuario agregado"})
+        `);
+        res.send({res:"Usuario agregado"});
     } catch (error) {
-        res.send({res:"No se pudo agregar el usuario"})
+        console.log("Error al agregar usuario:", error);
+        res.send({res:"No se pudo agregar el usuario"});
     }
 })
 
