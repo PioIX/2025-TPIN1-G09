@@ -9,10 +9,14 @@ async function existsUser(nombre, password, mail) {
             },
             body: JSON.stringify({ usuario: nombre, contraseña: password, mail:mail }),
         });
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
         return await respuesta.json();
     } catch (error) {
         alert("No se puede verificar el usuario");
         console.log(error);
+        return { ok: false, error: true };
     }
 }
 
@@ -25,31 +29,39 @@ async function conseguirID(nombre) {
             },
             body: JSON.stringify({ usuario: nombre }),
         });
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
         return await respuesta.json();
     } catch (error) {
         alert("No se puede conseguir el ID");
         console.log(error);
+        return null;
     }
 }
 
-async function esAdmin(nombre) {
+async function esAdmin(mail) {
     try {
         const respuesta = await fetch('http://localhost:4002/esAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ usuario: nombre }),
+            body: JSON.stringify({ mail: mail }),
         });
-        let result = await respuesta.json()
-        return result;
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+        let result = await respuesta.json();
+        console.log("Resultado esAdmin:", result);
         if (result.length>0) {
-            return result[0].es_admin;
+            return result[0].es_admin == true;
         } else {
-            return null;
+            return false;
         }
     } catch (error) {
         console.log(error);
+        return false;
     }
 }
 
@@ -58,52 +70,55 @@ async function ingresar() {
         let nombre = ui.getUser();
         let password = ui.getPassword();
         let mail = ui.getMail();
+        if (!nombre || !password || !mail) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
         let resultado = await existsUser(nombre, password, mail);
+        console.log("Resultado login:", resultado);
         if (resultado.ok) {
-            idLogged = await conseguirID(nombre);
-            let admin = await esAdmin(nombre);
-            if (admin > 0) {
-                ui.clearLoginInputs()
-                console.log("Soy admin");
-                ui.showModal("Ingreso");
-                ui.setUser(nombre);
-                ui.changeScreenAdmin();
+            let idData = await conseguirID(nombre, mail);
+            if (idData && idData.id) {
+                idLogged = idData.id;
+                
+                let admin = await esAdmin(mail);
+                console.log("Es admin:", admin);
+                
+                if (admin) {
+                    ui.clearLoginInputs();
+                    console.log("Soy admin");
+                    ui.setUser(nombre);
+                    ui.changeScreenAdmin();
+                } else {
+                    ui.clearLoginInputs();
+                    console.log("No soy admin");
+                    ui.changeScreen();
+                }
             } else {
-                ui.clearLoginInputs()
-                console.log("No soy admin");
-                ui.showModal("Ingreso");
-                ui.changeScreen();
+                alert("Error al obtener datos del usuario");
             }
         } else {
-            console.log("No ha podido ingresar al juego")
+            console.log("No ha podido ingresar al juego");
             ui.clearLoginInputs();
-            ui.showModal("Usuario o contraseña incorrectos");
+            alert("Usuario, contraseña o mail incorrectos");
             idLogged = -1;
         }
     } catch (error) {
         console.log(error);
-    }
-}
-
-async function encontrarDatos(nombre, password, mail) {
-    try {
-        let datos = {
-            nombre_usuario: nombre,
-            contraseña: password,
-            mail: mail,
-        }
-        console.log(datos)
-        return datos
-    } catch(error){
-        console.log(error);
+        alert("Error inesperado durante el ingreso");
     }
 }
 
 async function nuevoUsuario(nombre, password, mail) {
     try{
-        let result = await existsUser(nombre,password, mail)
+        if (!nombre || !password || !mail) {
+            alert("Todos los campos son obligatorios");
+            return 0;
+        }
+        let result = await existsUser(nombre,password, mail);
+        console.log("Verificación usuario:", result);
         console.log(result)
-        if(result.ok==false){//ESto significa q no existe el usuario
+        if(result.ok==false){//Esto significa q no existe el usuario
             console.log("Hola")
             let datos = await encontrarDatos(nombre, password, mail)
             const response = await fetch('http://localhost:4002/usuarios', {
@@ -132,10 +147,10 @@ async function registrarse() {
         let created = await nuevoUsuario(nombre, password, mail)
         if (created>0) {
             ui.clearLoginInputs()
-            ui.showModal("Registro exitoso", "Ya podés iniciar sesión");
+            alert("Registro exitoso, inicie sesión");
         } else {
             ui.clearLoginInputs()
-            ui.showModal("Error", "Usuario existente");
+            alert("Usuario existente, intente de nuevo");
         }
     } catch (error) {
         console.log(error);

@@ -12,7 +12,11 @@ class UserInterface {
     }
 
     setUser(username) {
-        document.getElementById("ingresoNombreUsuario").textContent = `¡Bienvenido ${username}!`;
+        const welcomeElement = document.getElementById("welcomeMessage");
+        if (welcomeElement) {
+            welcomeElement.innerHTML = `¡Bienvenido ${username}!`;
+            return;
+        }
     }
 
     getPassword() {
@@ -22,6 +26,7 @@ class UserInterface {
     clearLoginInputs() {
         document.getElementById("ingresoContraseña").value = "";
         document.getElementById("ingresoNombreUsuario").value = "";
+        document.getElementById("ingresoMail").value = "";
     }
 
     changeScreen() {
@@ -30,8 +35,12 @@ class UserInterface {
         if (notepad.style.display !== "none") {
             notepad.style.display = "none";
             loginForm.style.display = "";
-            this.clearAllNotes();
-            this.clearSelect();
+            if (typeof this.clearAllNotes === 'function') {
+                this.clearAllNotes();
+            }
+            if (typeof this.clearSelect === 'function') {
+                this.clearSelect();
+            }
         }
         else {
             notepad.style.display = "";
@@ -39,17 +48,25 @@ class UserInterface {
         }
     }
 
-    showModal(title, body) {
-        document.getElementById("modalTitle").textContent = title;
-        document.getElementById("modalBody").textContent = body;
-
-        const modal = new bootstrap.Modal(document.getElementById("modal"), {
-            keyboard: true,
-            focus: true
-        });
-
-        modal.show();
+    changeScreenAdmin() {
+        const admin = document.getElementById("admin");
+        const loginForm = document.getElementById("loginForm");
+        const notepad = document.getElementById("notepad");
+        
+        if (admin) {
+            admin.style.display = "";
+            loginForm.style.display = "none";
+            if (notepad) {
+                notepad.style.display = "none";
+            }
+        } else {
+            // Si no existe panel de admin, usar la pantalla normal
+            console.log("Panel de admin no encontrado, usando pantalla normal");
+            this.changeScreen();
+        }
     }
+
+    
 }
 
 const ui = new UserInterface();

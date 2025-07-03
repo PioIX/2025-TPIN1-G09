@@ -15,38 +15,24 @@
             <section class="intro-juego">
                 <h1>Preguntados Maquillaje</h1>
             </section>
-            <section class="login">
-                <legend>Iniciar sesión</legend>
-                <div>
-                    <input type="mail" class="form-control" id="ingresoMail" placeholder="Correo electrónico">
-                    <input type="password" class="form-control" id="ingresoContraseña" placeholder="Contraseña">
-                    <button class="btn-ingresar" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar sesión">Iniciar sesión</button>
-                </div>
-            </section>
-
-            <section class="registro">
-                <legend>Si no tiene cuenta, por favor registrese.</legend>
-                <div>
-                    <input type="text" class="form-control" id="ingresoNombreUsuario" placeholder="Nombre de usuario">
-                    <button class="btn-registrarse" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrarse">Registrarse</button>
-                </div>
-            </section>
-        </div>
-        
-        <div id="modal" class="modal fade" tabindex="-1" hidden>
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div id="loginForm">
+                <section class="login">
+                    <legend>Iniciar sesión</legend>
+                    <div>
+                        <input type="mail" class="form-control" id="ingresoMail" placeholder="Correo electrónico">
+                        <input type="password" class="form-control" id="ingresoContraseña" placeholder="Contraseña">
+                        <button class="btn-ingresar" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar sesión">Iniciar sesión</button>
                     </div>
-                    <div class="modal-body">
-                        <p id="modalBody">Modal body text goes here.</p>
+                </section>
+    
+                <section class="registro">
+                    <legend>Si no tiene cuenta, por favor registrese.</legend>
+                    <div>
+                        <input type="text" class="form-control" id="ingresoNombreUsuario" placeholder="Nombre de usuario">
+                        <button class="btn-registrarse" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrarse">Registrarse</button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">¡Listo!</button>
-                    </div>
-                </div>
+                    <div id="welcomeMessage"></div>
+                </section>
             </div>
         </div>
 
