@@ -15,25 +15,22 @@
             <section class="intro-juego">
                 <h1>Preguntados Maquillaje</h1>
             </section>
-            <div id="loginForm">
+            <section id="loginForm">
                 <section class="login">
-                    <legend>Iniciar sesión</legend>
+                    <legend>Formulario a Completar</legend>
                     <div>
                         <input type="mail" class="form-control" id="ingresoMail" placeholder="Correo electrónico">
+                        <input type="text" class="form-control" id="ingresoNombreUsuario" placeholder="Nombre de usuario">
                         <input type="password" class="form-control" id="ingresoContraseña" placeholder="Contraseña">
-                        <button class="btn-ingresar" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar sesión">Iniciar sesión</button>
                     </div>
                 </section>
     
-                <section class="registro">
-                    <legend>Si no tiene cuenta, por favor registrese.</legend>
-                    <div>
-                        <input type="text" class="form-control" id="ingresoNombreUsuario" placeholder="Nombre de usuario">
-                        <button class="btn-registrarse" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrarse">Registrarse</button>
-                    </div>
-                    <div id="welcomeMessage"></div>
-                </section>
-            </div>
+                <div class="botones">
+                    <button class="btn-ingresar" onclick="ingresar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar sesión">Iniciar sesión</button>
+                    <button class="btn-registrarse" onclick="registrarse()" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrarse">Registrarse</button>
+                </div>
+                <div id="welcomeMessage"></div>
+            </section>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
