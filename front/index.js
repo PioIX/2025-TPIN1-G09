@@ -7,31 +7,33 @@ async function existsUser(nombre, password, mail) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ usuario: nombre, contraseña: password, mail:mail }),
+            body: JSON.stringify({nombre: nombre, contraseña: password, mail:mail }),
         });
-        if (!respuesta.ok) {
-            throw new Error(`Error HTTP: ${respuesta.status}`);
-        }
-        return await respuesta.json();
+        //if (!respuesta.ok) {
+        //    throw new Error(`Error HTTP: ${respuesta.status}`);
+        //}
+        let result = await respuesta.json()
+        console.log(result)
+        return result
     } catch (error) {
         alert("No se puede verificar el usuario");
         console.log(error);
-        return { ok: false, error: true };
+        // return { ok: false, error: true };
     }
 }
 
 async function conseguirID(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
+        const respuesta = await fetch('http://localhost:4002/conseguirID', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ usuario: nombre }),
         });
-        if (!respuesta.ok) {
-            throw new Error(`Error HTTP: ${respuesta.status}`);
-        }
+        //if (!respuesta.ok) {
+        //    throw new Error(`Error HTTP: ${respuesta.status}`);
+        //}
         return await respuesta.json();
     } catch (error) {
         alert("No se puede conseguir el ID");
@@ -76,7 +78,7 @@ async function ingresar() {
         }
         let resultado = await existsUser(nombre, password, mail);
         console.log("Resultado login:", resultado);
-        if (resultado.ok) {
+        if (resultado.length > 0) {
             let idData = await conseguirID(nombre, mail);
             if (idData && idData.id) {
                 idLogged = idData.id;
@@ -88,11 +90,11 @@ async function ingresar() {
                     ui.clearLoginInputs();
                     console.log("Soy admin");
                     ui.setUser(nombre);
-                    ui.changeScreenAdmin();
+                    // ui.changeScreenAdmin();
                 } else {
                     ui.clearLoginInputs();
                     console.log("No soy admin");
-                    ui.changeScreen();
+                    // ui.changeScreen();
                 }
             } else {
                 alert("Error al obtener datos del usuario");
@@ -109,32 +111,42 @@ async function ingresar() {
     }
 }
 
-async function nuevoUsuario(nombre, password, mail) {
-    try{
-        if (!nombre || !password || !mail) {
-            alert("Todos los campos son obligatorios");
-            return 0;
+async function conseguirDatos(nombre, password, mail) {
+    try {
+        let datos = {
+            nombre: nombre,
+            contraseña: password,
+            mail: mail,
+            es_admin: 0
         }
-        let result = await existsUser(nombre,password, mail);
-        console.log("Verificación usuario:", result);
-        console.log(result)
-        if(result.ok==false){//Esto significa q no existe el usuario
-            console.log("Hola")
-            let datos = await encontrarDatos(nombre, password, mail)
-            const response = await fetch('http://localhost:4002/usuarios', {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json",
-                },
-                body: JSON.stringify(datos)
+        console.log(datos)
+        return datos
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function nuevoUsuario(nombre, password, mail) {
+    try {
+        let resultado = await existsUser(nombre, password, mail)
+        console.log(resultado)
+        if (resultado.length == 0) {
+                console.log("hola")
+                let datos = await conseguirDatos(nombre, password, mail)
+                const response = await fetch(`http://localhost:4002/insertarUsuario`, {
+                    method: "POST", //GET, POST, PUT o DELETE
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(datos)
             })
             let result = await response.json()
             console.log(result)
-            return 1;
+            return 1
         } else {
-            return -1;
-        }
-    } catch(error) {
+                return -1;
+            }
+    } catch (error) {
         console.log(error)
     }
 }

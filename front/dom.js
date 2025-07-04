@@ -52,18 +52,9 @@ class UserInterface {
         const admin = document.getElementById("admin");
         const loginForm = document.getElementById("loginForm");
         const notepad = document.getElementById("notepad");
-        
-        if (admin) {
-            admin.style.display = "";
-            loginForm.style.display = "none";
-            if (notepad) {
-                notepad.style.display = "none";
-            }
-        } else {
-            // Si no existe panel de admin, usar la pantalla normal
-            console.log("Panel de admin no encontrado, usando pantalla normal");
-            this.changeScreen();
-        }
+        notepad.style.display = "none";
+        loginForm.style.display = "none";
+        admin.style.display = "block";
     }
 
     

@@ -137,34 +137,20 @@ app.post('/respuestas', async function (req, res) {
 
 app.post('/usuarioExiste', async function(req,res){
     try {
-        console.log("Verificando usuario:",req.body);
-        if (req.body.mail && !req.body.usuario && !req.body.contraseña) {
-            const response = await realizarQuery (`SELECT mail FROM Usuarios WHERE mail = "${req.body.mail}"`);
-            if (response.length == 0) {
-                res.send({res: "El usuario no existe",ok: false});
-            } else {
-                res.send({res: "El mail ya fue usado", ok: true});
-            }
-        }
-        else if (req.body.usuario && req.body.contraseña && req.body.mail){
-            const response = await realizarQuery (`SELECT * FROM Usuarios WHERE nombre_usuario = "${req.body.usuario}" AND contraseña = "${req.body.contraseña}" AND mail = "${req.body.mail}"`);
-            if (response.length > 0) {
-                res.send({res: "Usuario válido", ok: true, usuario: response[0]});
-            } else {
-            res.send({res: "Credenciales incorrectas", ok: false});
-            }
-            } else {
-            res.status(400).send({res: "Datos incompletos", ok: false});
-            }
-            } catch (error) {
-            console.log("Error en usuarioExiste:", error);
-            res.status(500).send({res: "Error del servidor", ok: false});
-        }
-});
+        console.log("Recibido:", req.body.nombre, req.body.contraseña, req.body.mail);
+        const usuario = await realizarQuery(`
+            SELECT * FROM Usuarios WHERE nombre = '${req.body.nombre}' and contraseña = '${req.body.contraseña}' and mail = '${req.body.mail}'
+        `)
+        console.log(usuario)
+        res.send(usuario)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 app.post('/conseguirID', async function(req, res) {
     try {
-        const respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE nombre_usuario = "${req.body.usuario}" AND mail = "${req.body.mail}"`);
+        const respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE nombre = "${req.body.usuario}"`);
         if (respuesta.length > 0) {
             res.send({id: respuesta[0].id_usuario});
         } else {
@@ -187,3 +173,15 @@ app.post('/esAdmin', async function(req, res) {
         res.status(500).send({error: "Error del servidor"});
     }
    });
+
+app.post('/insertarUsuario', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Usuarios (nombre, mail, contraseña, es_admin)
+            VALUES ('${req.body.nombre}','${req.body.mail}','${req.body.contraseña}','${req.body.es_admin}')
+        `)
+        res.send({mensaje: "Se inserto el Usuario, Haga el Login"})
+    } catch (error) {
+        console.log(error)
+    }
+})
