@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +23,6 @@ main {
     text-align: center;
 }
 
-/* Título principal */
 h1 {
     font-size: 3rem;
     color: #ff6b35;
@@ -34,7 +32,6 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Párrafo descriptivo */
 p {
     font-size: 1.2rem;
     color: #333;
@@ -43,7 +40,6 @@ p {
     max-width: 600px;
 }
 
-/* Contenedor principal de categorías */
 #container1 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

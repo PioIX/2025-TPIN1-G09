@@ -178,34 +178,75 @@ function mostrarInputs() {
     let div = ''
     switch(valor) {
         case "historia":
-            div += `<label>Agregue una pregunta</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 1</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 2</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 3</label>`
-            div += `<input type="text">`  
+            div += `
+                <label>Agregue una pregunta</label>
+                <input type="text" placeholder="Escribe tu pregunta aquí">
+                <div class="input-group">
+                    <label>Agregue la opción 1</label>
+                    <input type="text" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1-historia">
+                    <label for="check-opcion1-historia">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 2</label>
+                    <input type="text" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2-historia">
+                    <label for="check-opcion2-historia">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 3</label>
+                    <input type="text" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion3-historia">
+                    <label for="check-opcion3-historia">Activar</label>
+                </div>
+            `;
             break;
         case "geografia":
-            div += `<label>Agregue una pregunta</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 1</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 2</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 3</label>`
-            div += `<input type="text">` 
+            div += `
+                <label>Agregue una pregunta</label>
+                <input type="text" placeholder="Escribe tu pregunta aquí">
+                <div class="input-group">
+                    <label>Agregue la opción 1</label>
+                    <input type="text" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1-geografia">
+                    <label for="check-opcion1-geografia">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 2</label>
+                    <input type="text" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2-geografia">
+                    <label for="check-opcion2-geografia">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 3</label>
+                    <input type="text" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion3-geografia">
+                    <label for="check-opcion3-geografia">Activar</label>
+                </div>
+            `;
             break;
         case "aplicacion":
-            div += `<label>Agregue la URL de la imagen</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 1</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 2</label>`
-            div += `<input type="text">` 
-            div += `<label>Agregue la opción 3</label>`
-            div += `<input type="text">` 
+            div += `
+                <label>Agregue la URL de la imagen</label>
+                <input type="checkbox">
+                    <label>Agregue la opción 1</label>
+                    <input type="text" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1-aplicacion">
+                    <label for="check-opcion1-aplicacion">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 2</label>
+                    <input type="text" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2-aplicacion">
+                    <label for="check-opcion2-aplicacion">Activar</label>
+                </div>
+                <div class="input-group">
+                    <label>Agregue la opción 3</label>
+                    <input type="text" placeholder="Opción 3">
+                    <input type="checkbox" id="check-opcion3-aplicacion">
+                    <label for="check-opcion3-aplicacion">Activar</label>
+                </div>
+            `;
             break;
         case "logos":
         default:
