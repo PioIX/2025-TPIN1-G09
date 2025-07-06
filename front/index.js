@@ -228,7 +228,8 @@ function mostrarInputs() {
         case "aplicacion":
             div += `
                 <label>Agregue la URL de la imagen</label>
-                <input type="checkbox">
+                <input type="text" placeholder="Escribe la URL">
+                <div class="input-group">
                     <label>Agregue la opción 1</label>
                     <input type="text" placeholder="Opción 1">
                     <input type="checkbox" id="check-opcion1-aplicacion">
