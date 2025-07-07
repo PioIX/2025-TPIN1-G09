@@ -172,7 +172,7 @@ app.post('/esAdmin', async function(req, res) {
         console.log("Error en esAdmin:", error);
         res.status(500).send({error: "Error del servidor"});
     }
-   });
+});
 
 app.post('/insertarUsuario', async function(req,res){
     try {
@@ -184,4 +184,78 @@ app.post('/insertarUsuario', async function(req,res){
     } catch (error) {
         console.log(error)
     }
-})
+});
+
+app.post('/subirPreguntaHistoria', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Preguntas (contenido, categoria)
+            VALUES ('${req.body.contenido}','Historia')
+        `)
+        res.send({mensaje: "Se insertó la pregunta"})
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+app.post('/subirPreguntaGeografia', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Preguntas (contenido, categoria)
+            VALUES ('${req.body.contenido}','Geografía')
+        `)
+        res.send({mensaje: "Se insertó la pregunta"})
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+app.post('/subirImagenAplicacion', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Preguntas (contenido, categoria)
+            VALUES ('${req.body.contenido}','Aplicación')
+        `)
+        res.send({mensaje: "Se insertó la pregunta"})
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+app.post('/subirImagenAplicacion', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Preguntas (contenido, categoria)
+            VALUES ('${req.body.contenido}','Aplicación')
+        `)
+        res.send({mensaje: "Se insertó la pregunta"})
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+app.post('/respuestas', async function (req, res) {
+    console.log(req.body)
+    try {
+        await  realizarQuery(`INSERT INTO Respuestas ("id_respuesta","texto","es_correcta","id_pregunta") VALUES
+        (${req.body.id_respuesta},"${req.body.texto}",${req.body.es_correcta},${req.body.id_pregunta});`);
+        res.send("Respuesta agregada");
+    } catch (error) {
+        console.log("Error al agregar respuesta:", error);
+        res.status(500).send("Error al agregar respuesta");
+    } 
+});
+
+app.delete('/EliminarPregunta', async function(req,res){
+    try {
+        const result = await realizarQuery(`
+            DELETE FROM Respuestas WHERE id_pregunta = ${req.body.id_pregunta}    
+        `)
+        const respuesta = await realizarQuery(`
+            DELETE FROM Preguntas WHERE id_pregunta = ${req.body.id_pregunta}
+        `)
+        res.send({mensaje: "Se Elimino la pregunta"})
+    } catch (error) {
+        console.log(error)
+    }
+});

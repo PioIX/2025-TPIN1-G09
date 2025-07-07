@@ -199,6 +199,10 @@ function mostrarInputs() {
                     <input type="checkbox" id="check-opcion3-historia">
                     <label for="check-opcion3-historia">Activar</label>
                 </div>
+                <button onclick="postPreguntaHistoria()">Agregar pregunta</button>
+                <label>Elimine una pregunta</label>
+                <input type="text" placeholder="Escriba el ID de la pregunta aquí">
+                <button onclick="deletePreguntaHistoria()">Eliminar pregunta</button>
             `;
             break;
         case "geografia":
@@ -223,6 +227,10 @@ function mostrarInputs() {
                     <input type="checkbox" id="check-opcion3-geografia">
                     <label for="check-opcion3-geografia">Activar</label>
                 </div>
+                <button onclick="postPreguntaGeografia()">Agregar pregunta</button>
+                <label>Elimine una pregunta</label>
+                <input type="text" placeholder="Escriba el ID de la pregunta aquí">
+                <button onclick="deletePreguntaGeografia()">Eliminar pregunta</button>
             `;
             break;
         case "aplicacion":
@@ -247,15 +255,67 @@ function mostrarInputs() {
                     <input type="checkbox" id="check-opcion3-aplicacion">
                     <label for="check-opcion3-aplicacion">Activar</label>
                 </div>
+                <button onclick="postImagenAplicacion()">Agregar imagen</button>
+                <label>Elimine una imagen</label>
+                <input type="text" placeholder="Escriba el ID de la imagen aquí">
+                <button onclick="deleteImagenAplicacion()">Eliminar imagen</button>
             `;
             break;
         case "logos":
         default:
-            div += `<label>Agregue la URL de la imagen</label>`
-            div += `<input type="text">`  
+            div += `
+                <label>Agregue la URL de la imagen</label>
+                <input type="text">
+                <button onclick="postImagenLogos()">Agregar imagen</button>
+                <label>Elimine una imagen</label>
+                <input type="text" placeholder="Escriba el ID de la imagen aquí">
+                <button onclick="deleteImagenLogos()">Eliminar imagen</button>
+            `;
         }
 
         document.getElementById("inputs").innerHTML = ""
         document.getElementById("inputs").innerHTML = div
 
 }
+
+function datosPregunta() {
+    let datos = {
+        pregunta: ui.getPregunta(),
+        categoria: ui.getCategoria(),
+    }
+    return datos
+}
+
+async function postPreguntaHistoria(){
+    let datos = await datosPregunta()
+    console.log(datos)
+    const response = await fetch(`http://localhost:4002/subirPreguntaHistoria`, {
+        method: "POST", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos)
+    })
+    let result = await response.json()
+    console.log(result)
+    ui.showModal("Pregunta subida con éxito")
+}
+
+function getIdPreguntaEliminar(){
+    
+}
+          
+async function deletePreguntaHistoria(){
+    let result = getIdPreguntaEliminar()
+    console.log(result)
+    const response = await fetch(`http://localhost:4002/EliminarPreguntaHistoria`, {
+        method: "DELETE", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id_pregunta: result})
+    })
+    let resultado = await response.json()
+    console.log(resultado)
+    ui.showModal("Pregunta eliminada")
+} 
