@@ -186,11 +186,11 @@ app.post('/insertarUsuario', async function(req,res){
     }
 });
 
-app.post('/subirPreguntaHistoria', async function(req,res){
+app.post('/subirPregunta', async function(req,res){
     try {
         const respuesta = await realizarQuery(`
             INSERT INTO Preguntas (contenido, categoria)
-            VALUES ('${req.body.contenido}','Historia')
+            VALUES ('${req.body.contenido}','${req.body.categoria}')
         `)
         res.send({mensaje: "Se insertó la pregunta"})
     } catch (error) {
@@ -259,3 +259,41 @@ app.delete('/EliminarPregunta', async function(req,res){
         console.log(error)
     }
 });
+
+
+app.post('/conseguirIdPregunta', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            SELECT id_pregunta FROM Preguntas WHERE contenido = '${req.body.contenido}'    
+        `)
+        console.log(respuesta)
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.post('/subirRespuesta', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Respuestas (texto, es_correcta, id_pregunta)
+            VALUES ('${req.body.texto}',${req.body.es_correcta},${req.body.id_pregunta})
+        `)
+        res.send({mensaje: "Se insertó la respuesta"})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.get('/preguntas', async function(req, res){
+    try {
+        console.log(req.query);
+        const preguntas = await realizarQuery(`
+        SELECT * FROM Preguntas;
+        `)
+        console.log({preguntas})
+        res.send(preguntas)
+    } catch (error) {
+        console.log(error)
+    }
+})
