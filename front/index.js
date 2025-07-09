@@ -89,12 +89,11 @@ async function ingresar() {
                 if (admin) {
                     ui.clearLoginInputs();
                     console.log("Soy admin");
-                    ui.setUser(nombre);
-                    // ui.changeScreenAdmin();
+                    ui.changeScreenAdmin();
                 } else {
                     ui.clearLoginInputs();
                     console.log("No soy admin");
-                    // ui.changeScreen();
+                    ui.changeScreen();
                 }
             } else {
                 alert("Error al obtener datos del usuario");

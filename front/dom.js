@@ -30,31 +30,25 @@ class UserInterface {
     }
 
     changeScreen() {
-        const notepad = document.getElementById("notepad");
-        const loginForm = document.getElementById("loginForm");
-        if (notepad.style.display !== "none") {
-            notepad.style.display = "none";
-            loginForm.style.display = "";
-            if (typeof this.clearAllNotes === 'function') {
-                this.clearAllNotes();
-            }
-            if (typeof this.clearSelect === 'function') {
-                this.clearSelect();
-            }
-        }
-        else {
-            notepad.style.display = "";
-            loginForm.style.display = "none";
+        try {
+            location.assign("./categorias.html");
+            console.log("location.assign ejecutado");
+        } catch (error) {
+            console.error("Error con location.assign:", error);
+            // Alternativa
+            window.location.href = "html/categorias.html";
         }
     }
 
     changeScreenAdmin() {
-        const admin = document.getElementById("admin");
-        const loginForm = document.getElementById("loginForm");
-        const notepad = document.getElementById("notepad");
-        notepad.style.display = "none";
-        loginForm.style.display = "none";
-        admin.style.display = "block";
+        try {
+            location.assign("./admin.html");
+            console.log("location.assign ejecutado");
+        } catch (error) {
+            console.error("Error con location.assign:", error);
+            // Alternativa
+            window.location.href = "html/admin.html";
+        }
     }
 
     
