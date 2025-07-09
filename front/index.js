@@ -176,83 +176,84 @@ function mostrarInputs() {
     let valor = document.getElementById("categorias").value;
     let div = ''
     switch(valor) {
-        case "historia":
+        case "Historia":
+            llenarSelectPreguntaEliminar();
             div += `
                 <label>Agregue una pregunta</label>
-                <input type="text" placeholder="Escribe tu pregunta aquí">
+                <input type="text" id="preguntaAgregar" placeholder="Escribe tu pregunta aquí">
                 <div class="input-group">
                     <label>Agregue la opción 1</label>
-                    <input type="text" placeholder="Opción 1">
-                    <input type="checkbox" id="check-opcion1-historia">
-                    <label for="check-opcion1-historia">Activar</label>
+                    <input type="text" id="opcion1" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1">
+                    <label for="check-opcion1">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 2</label>
-                    <input type="text" placeholder="Opción 2">
-                    <input type="checkbox" id="check-opcion2-historia">
-                    <label for="check-opcion2-historia">Activar</label>
+                    <input type="text" id="opcion2" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2">
+                    <label for="check-opcion2">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 3</label>
-                    <input type="text" placeholder="Opción 1">
-                    <input type="checkbox" id="check-opcion3-historia">
-                    <label for="check-opcion3-historia">Activar</label>
+                    <input type="text" id="opcion3" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion3">
+                    <label for="check-opcion3">Activar</label>
                 </div>
-                <button onclick="postPreguntaHistoria()">Agregar pregunta</button>
+                <button onclick="postPregunta()">Agregar pregunta</button>
                 <label>Elimine una pregunta</label>
-                <input type="text" placeholder="Escriba el ID de la pregunta aquí">
-                <button onclick="deletePreguntaHistoria()">Eliminar pregunta</button>
+                <select id="selectEliminar"></select>
+                <button onclick="deletePregunta()">Eliminar pregunta</button>
             `;
             break;
-        case "geografia":
+        case "Geografia":
             div += `
                 <label>Agregue una pregunta</label>
-                <input type="text" placeholder="Escribe tu pregunta aquí">
+                <input type="text" id="preguntaAgregar" placeholder="Escribe tu pregunta aquí">
                 <div class="input-group">
                     <label>Agregue la opción 1</label>
-                    <input type="text" placeholder="Opción 1">
-                    <input type="checkbox" id="check-opcion1-geografia">
-                    <label for="check-opcion1-geografia">Activar</label>
+                    <input type="text" id="opcion1" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1">
+                    <label for="check-opcion1">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 2</label>
-                    <input type="text" placeholder="Opción 2">
-                    <input type="checkbox" id="check-opcion2-geografia">
-                    <label for="check-opcion2-geografia">Activar</label>
+                    <input type="text" id="opcion2" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2">
+                    <label for="check-opcion2">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 3</label>
-                    <input type="text" placeholder="Opción 1">
-                    <input type="checkbox" id="check-opcion3-geografia">
-                    <label for="check-opcion3-geografia">Activar</label>
+                    <input type="text" id="opcion3" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion3">
+                    <label for="check-opcion3">Activar</label>
                 </div>
-                <button onclick="postPreguntaGeografia()">Agregar pregunta</button>
+                <button onclick="postPregunta()">Agregar pregunta</button>
                 <label>Elimine una pregunta</label>
                 <input type="text" placeholder="Escriba el ID de la pregunta aquí">
-                <button onclick="deletePreguntaGeografia()">Eliminar pregunta</button>
+                <button onclick="deletePregunta()">Eliminar pregunta</button>
             `;
             break;
-        case "aplicacion":
+        case "Aplicacion":
             div += `
                 <label>Agregue la URL de la imagen</label>
                 <input type="text" placeholder="Escribe la URL">
                 <div class="input-group">
                     <label>Agregue la opción 1</label>
-                    <input type="text" placeholder="Opción 1">
-                    <input type="checkbox" id="check-opcion1-aplicacion">
-                    <label for="check-opcion1-aplicacion">Activar</label>
+                    <input type="text" id="opcion1" placeholder="Opción 1">
+                    <input type="checkbox" id="check-opcion1">
+                    <label for="check-opcion1">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 2</label>
-                    <input type="text" placeholder="Opción 2">
-                    <input type="checkbox" id="check-opcion2-aplicacion">
-                    <label for="check-opcion2-aplicacion">Activar</label>
+                    <input type="text" id="opcion2" placeholder="Opción 2">
+                    <input type="checkbox" id="check-opcion2">
+                    <label for="check-opcion2">Activar</label>
                 </div>
                 <div class="input-group">
                     <label>Agregue la opción 3</label>
-                    <input type="text" placeholder="Opción 3">
-                    <input type="checkbox" id="check-opcion3-aplicacion">
-                    <label for="check-opcion3-aplicacion">Activar</label>
+                    <input type="text" id="opcion3" placeholder="Opción 3">
+                    <input type="checkbox" id="check-opcion3">
+                    <label for="check-opcion3">Activar</label>
                 </div>
                 <button onclick="postImagenAplicacion()">Agregar imagen</button>
                 <label>Elimine una imagen</label>
@@ -277,18 +278,61 @@ function mostrarInputs() {
 
 }
 
-function datosPregunta() {
+async function conseguirIdPregunta(pregunta) {
+    const response = await fetch(`http://localhost:4002/conseguirIdPregunta`, {
+        method: "POST", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({contenido: pregunta})
+    })
+    let result = await response.json()
+    console.log(result)
+    if (result.length > 0) {
+        console.log(result[0].id_pregunta)
+        return result[0].id_pregunta; 
+    } else {
+        return -1; 
+    }
+}
+
+
+async function datosPregunta() {
     let datos = {
-        pregunta: ui.getPregunta(),
+        contenido: ui.getPregunta(),
         categoria: ui.getCategoria(),
     }
     return datos
 }
 
-async function postPreguntaHistoria(){
+async function datosRespuesta() {
+    let pregunta = ui.getPregunta();
+    let id_pregunta = await conseguirIdPregunta(pregunta);
+
+    let respuestas = [];
+
+    for (let i = 1; i <= 3; i++) {
+        // ID del input de texto
+        let inputTexto = document.getElementById(`opcion${i === 1 ? "1" : i === 2 ? "2" : "3"}`);
+        let inputCheckbox = document.getElementById(`check-opcion${i}`);
+
+        // Validamos que haya algo escrito
+        if (inputTexto.value.trim() !== "") {
+            respuestas.push({
+                id_pregunta: id_pregunta,
+                es_correcta: inputCheckbox.checked,
+                texto: inputTexto.value.trim()
+            });
+        }
+    }
+
+    return respuestas;
+}
+
+async function postPregunta(){
     let datos = await datosPregunta()
     console.log(datos)
-    const response = await fetch(`http://localhost:4002/subirPreguntaHistoria`, {
+    const response = await fetch(`http://localhost:4002/subirPregunta`, {
         method: "POST", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -297,17 +341,29 @@ async function postPreguntaHistoria(){
     })
     let result = await response.json()
     console.log(result)
-    ui.showModal("Pregunta subida con éxito")
+    let respuestas = await datosRespuesta()
+    for (let respuesta of respuestas) {
+            const responde = await fetch("http://localhost:4002/subirRespuesta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(respuesta)
+            });
+    
+            let result = await responde.json();
+            console.log("Respuesta subida:", result);
+
+        }
+
 }
 
-function getIdPreguntaEliminar(){
-    
-}
+
           
-async function deletePreguntaHistoria(){
-    let result = getIdPreguntaEliminar()
+async function deletePregunta(){
+    let result = ui.getIdPreguntaSelect()
     console.log(result)
-    const response = await fetch(`http://localhost:4002/EliminarPreguntaHistoria`, {
+    const response = await fetch(`http://localhost:4002/EliminarPregunta`, {
         method: "DELETE", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -316,5 +372,29 @@ async function deletePreguntaHistoria(){
     })
     let resultado = await response.json()
     console.log(resultado)
-    ui.showModal("Pregunta eliminada")
 } 
+
+async function conseguirPregunta(){
+    const response = await fetch(`http://localhost:4002/preguntas`, {
+        method: "GET", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    let result = await response.json()
+    return result
+}
+
+async function llenarSelectPreguntaEliminar() {
+    let preguntas = await conseguirPregunta()
+    console.log(preguntas)
+    let selectPregunta = ``
+    for (let i = 0; i < preguntas.length; i++) {
+    selectPregunta += `<option value="${preguntas[i].id_pregunta}">
+        ${preguntas[i].id_pregunta} - ${preguntas[i].contenido}
+    </option>`;
+    }
+
+    document.getElementById("selectEliminar").innerHTML += selectPregunta
+}
+

@@ -51,7 +51,26 @@ class UserInterface {
         }
     }
 
-    
+    // ------------------------------------- PARTE DE AGREGAR PREGUNTAS
+
+
+    getPregunta() {
+        return document.getElementById("preguntaAgregar").value
+    }
+
+    getCategoria() {
+        return document.getElementById("categorias").value
+    }
+
+
+    getIdPreguntaSelect() {
+        return document.getElementById("selectEliminar").value
+    }
+
+
+
+
+
 }
 
 const ui = new UserInterface();
