@@ -297,3 +297,26 @@ app.get('/preguntas', async function(req, res){
         console.log(error)
     }
 })
+
+
+app.get('/preguntasPorCategoria', async function(req,res) {
+    try {
+        const respuesta = await realizarQuery(`
+            SELECT * FROM Preguntas WHERE categoria = '${req.query.categoria}' 
+        `)
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.get('/respuestasPorPregunta', async function(req,res) {
+    try {
+        const respuesta = await realizarQuery(`
+            SELECT * FROM Respuestas WHERE id_pregunta = '${req.query.id_pregunta}' 
+        `)
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error)
+    }
+})

@@ -6,18 +6,19 @@
     <title>Historia</title>
     <link rel="stylesheet" href="../styles/historia.css">
 </head>
-<body>
+<body onload="obtenerPreguntasPorCategoria()">
     <main>
         <h1>Historia</h1>
+        <br>
         <div class="historia">
-            <h3 id="his-consigna1">bkbjb</h3>
-            <div class="multiple-choice">
-                <button id="his1-opcion1">bkjbbbj</button>
-                <button id="his1-opcion2"></button>
-                <button id="his1-opcion3"></button>
+            <h3 id="preguntas"></h3>
+            <div class="multiple-choice" id="respuestas">
+
             </div>
+            
             <a href="categorias.html"><button class="boton-escape">Escape</button></a>
         </div>
+        <!--
         <div class="historia">
             <h3 id="his-consigna2"></h3>
             <div class="multiple-choice">
@@ -99,6 +100,8 @@
             </div>
             <a href="categorias.html"><button class="boton-escape">Escape</button></a>
         </div>
+        -->
     </main>
+    <script src="../preguntas.js"></script>
 </body>
 </html>
