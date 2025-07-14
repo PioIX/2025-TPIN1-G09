@@ -398,3 +398,7 @@ async function llenarSelectPreguntaEliminar() {
     document.getElementById("selectEliminar").innerHTML += selectPregunta
 }
 
+function redirigirCategoria(categoria) {
+    localStorage.setItem("categoria", categoria);
+    location.href = categoria + ".html"
+}
