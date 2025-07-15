@@ -126,8 +126,8 @@ app.post('/respuestasPartida', async function (req, res) {
 app.post('/respuestas', async function (req, res) {
     console.log(req.body)
     try {
-        await  realizarQuery(`INSERT INTO Respuestas ("id_respuesta","texto","es_correcta","id_pregunta") VALUES
-        (${req.body.id_respuesta},"${req.body.texto}",${req.body.es_correcta},${req.body.id_pregunta});`);
+        await  realizarQuery(`INSERT INTO Respuestas ("id_respuesta","texto","es_correcta","id_pregunta","imagen") VALUES
+        (${req.body.id_respuesta},"${req.body.texto}",${req.body.es_correcta},${req.body.id_pregunta},${req.body.imagen});`);
         res.send("Respuesta agregada");
     } catch (error) {
         console.log("Error al agregar respuesta:", error);
@@ -237,8 +237,8 @@ app.post('/subirImagenAplicacion', async function(req,res){
 app.post('/respuestas', async function (req, res) {
     console.log(req.body)
     try {
-        await  realizarQuery(`INSERT INTO Respuestas ("id_respuesta","texto","es_correcta","id_pregunta") VALUES
-        (${req.body.id_respuesta},"${req.body.texto}",${req.body.es_correcta},${req.body.id_pregunta});`);
+        await  realizarQuery(`INSERT INTO Respuestas ("id_respuesta","texto","es_correcta","id_pregunta","imagen") VALUES
+        (${req.body.id_respuesta},"${req.body.texto}",${req.body.es_correcta},${req.body.id_pregunta},${req.body.imagen});`);
         res.send("Respuesta agregada");
     } catch (error) {
         console.log("Error al agregar respuesta:", error);
@@ -276,8 +276,8 @@ app.post('/conseguirIdPregunta', async function(req,res){
 app.post('/subirRespuesta', async function(req,res){
     try {
         const respuesta = await realizarQuery(`
-            INSERT INTO Respuestas (texto, es_correcta, id_pregunta)
-            VALUES ('${req.body.texto}',${req.body.es_correcta},${req.body.id_pregunta})
+            INSERT INTO Respuestas (texto, es_correcta, id_pregunta,imagen)
+            VALUES ('${req.body.texto}',${req.body.es_correcta},${req.body.id_pregunta},${req.body.imagen})
         `)
         res.send({mensaje: "Se insertó la respuesta"})
     } catch (error) {
