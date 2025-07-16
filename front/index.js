@@ -2,7 +2,7 @@ let idLogged = -1;
 
 async function existsUser(nombre, password, mail) {
     try {
-        const respuesta = await fetch('http://localhost:4002/usuarioExiste', {
+        const respuesta = await fetch('http://localhost:4000/usuarioExiste', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +24,7 @@ async function existsUser(nombre, password, mail) {
 
 async function conseguirID(nombre) {
     try {
-        const respuesta = await fetch('http://localhost:4002/conseguirID', {
+        const respuesta = await fetch('http://localhost:4000/conseguirID', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ async function conseguirID(nombre) {
 
 async function esAdmin(mail) {
     try {
-        const respuesta = await fetch('http://localhost:4002/esAdmin', {
+        const respuesta = await fetch('http://localhost:4000/esAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -132,7 +132,7 @@ async function nuevoUsuario(nombre, password, mail) {
         if (resultado.length == 0) {
                 console.log("hola")
                 let datos = await conseguirDatos(nombre, password, mail)
-                const response = await fetch(`http://localhost:4002/insertarUsuario`, {
+                const response = await fetch(`http://localhost:4000/insertarUsuario`, {
                     method: "POST", //GET, POST, PUT o DELETE
                     headers: {
                         "Content-Type": "application/json",
@@ -279,7 +279,7 @@ function mostrarInputs() {
 }
 
 async function conseguirIdPregunta(pregunta) {
-    const response = await fetch(`http://localhost:4002/conseguirIdPregunta`, {
+    const response = await fetch(`http://localhost:4000/conseguirIdPregunta`, {
         method: "POST", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -332,7 +332,7 @@ async function datosRespuesta() {
 async function postPregunta(){
     let datos = await datosPregunta()
     console.log(datos)
-    const response = await fetch(`http://localhost:4002/subirPregunta`, {
+    const response = await fetch(`http://localhost:4000/subirPregunta`, {
         method: "POST", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -343,7 +343,7 @@ async function postPregunta(){
     console.log(result)
     let respuestas = await datosRespuesta()
     for (let respuesta of respuestas) {
-            const responde = await fetch("http://localhost:4002/subirRespuesta", {
+            const responde = await fetch("http://localhost:4000/subirRespuesta", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -363,7 +363,7 @@ async function postPregunta(){
 async function deletePregunta(){
     let result = ui.getIdPreguntaSelect()
     console.log(result)
-    const response = await fetch(`http://localhost:4002/EliminarPregunta`, {
+    const response = await fetch(`http://localhost:4000/EliminarPregunta`, {
         method: "DELETE", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -375,7 +375,7 @@ async function deletePregunta(){
 } 
 
 async function conseguirPregunta(){
-    const response = await fetch(`http://localhost:4002/preguntas`, {
+    const response = await fetch(`http://localhost:4000/preguntas`, {
         method: "GET", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",

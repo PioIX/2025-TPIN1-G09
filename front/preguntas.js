@@ -13,7 +13,7 @@ async function obtenerPreguntasPorCategoria() {
     let categoria = localStorage.getItem("categoria")
     console.log(categoria)
     if (categoria != undefined) {
-        const response = await fetch(`http://localhost:4002/preguntasPorCategoria?categoria=` + categoria, {
+        const response = await fetch(`http://localhost:4000/preguntasPorCategoria?categoria=` + categoria, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -41,7 +41,7 @@ async function obtenerPreguntasPorCategoria() {
 }
 
 async function llenarPreguntaAplicacion() {
-    const response = await fetch(`http://localhost:4002/respuestasPorPregunta?id_pregunta=` + preguntas[contadorPreguntaAplicacion].id_pregunta, {
+    const response = await fetch(`http://localhost:4000/respuestasPorPregunta?id_pregunta=` + preguntas[contadorPreguntaAplicacion].id_pregunta, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ async function llenarPreguntaAplicacion() {
 }
 
 async function llenarPreguntaLogos() {
-    const response = await fetch(`http://localhost:4002/respuestasPorPregunta?id_pregunta=` + preguntas.id_pregunta, {
+    const response = await fetch(`http://localhost:4000/respuestasPorPregunta?id_pregunta=` + preguntas.id_pregunta, {
         method: "GET", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -82,7 +82,7 @@ async function llenarPreguntaLogos() {
     document.getElementById("preguntaLogos").innerHTML = `
     ${preguntas[0].contenido}
 `
-    let res = await fetch(`http://localhost:4002/preguntasLogos` , {
+    let res = await fetch(`http://localhost:4000/preguntasLogos` , {
         method: "GET", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
@@ -99,14 +99,14 @@ async function llenarPreguntaLogos() {
 /**
  *  Tarea: Hacer funcion para la respuestade logos
  * Al presionar el boton 
- * Mandar un fetch con el id_pregunta y ver cual es la respuesta correcta (fetch(`http://localhost:4002/respuestasPorPregunta?id_pregunta=` + idPreguntaLogos)
+ * Mandar un fetch con el id_pregunta y ver cual es la respuesta correcta (fetch(`http://localhost:4000/respuestasPorPregunta?id_pregunta=` + idPreguntaLogos)
  * Hacer un if quecompare la respuesta del back con lo q puso el usuario en el input
  * Hacer un alert si esta bien o mal
  * Avanzar de pregunta, que seria llamar otra vez a llenarPreguntaLogos()
  */
 
 async function llenarPregunta() {
-    const response = await fetch(`http://localhost:4002/respuestasPorPregunta?id_pregunta=` + preguntas[contadorPregunta].id_pregunta, {
+    const response = await fetch(`http://localhost:4000/respuestasPorPregunta?id_pregunta=` + preguntas[contadorPregunta].id_pregunta, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
