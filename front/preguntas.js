@@ -55,7 +55,7 @@ async function llenarPreguntaAplicacion() {
     `
     document.getElementById("respuestasAplicacion").innerHTML = `
         <button id="opcion1" onclick="enviarRespuestaAplicacion(${respuestas[0].es_correcta})">
-            <img src="" alt="">
+            <img src="/img_opciones/" alt="">
         </button>
         <button id="opcion2" onclick="enviarRespuestaAplicacion(${respuestas[1].es_correcta})">
             <img src="" alt="">

@@ -51,9 +51,6 @@ class UserInterface {
         }
     }
 
-    // ------------------------------------- PARTE DE AGREGAR PREGUNTAS
-
-
     getPregunta() {
         return document.getElementById("preguntaAgregar").value
     }
@@ -67,6 +64,14 @@ class UserInterface {
         return document.getElementById("selectEliminar").value
     }
 
+    getImagenesRespuestas(){
+        let respuestas = datosRespuesta()
+        for (let i=0; i<respuestas.length; i++){
+            if (respuestas[i].id_pregunta >20 && respuestas[i].id_pregunta < 31){
+                return document.getElementById("")
+            }
+        }
+    }
 
 
 
