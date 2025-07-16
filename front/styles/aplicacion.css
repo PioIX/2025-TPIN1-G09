@@ -72,8 +72,6 @@ h1 {
     padding: 0 20px;
 }
 
-
-
 .multiple-choice-img {
     display: flex;
     justify-content: center;
@@ -89,7 +87,6 @@ h1 {
     background: rgba(255, 255, 255, 0.9);
     color: #666;
     border: 2px solid rgba(255, 255, 255, 0.5);
-    padding: 20px 30px;
     border-radius: 25px;
     font-size: 1.1rem;
     font-weight: 500;
@@ -99,6 +96,19 @@ h1 {
     min-width: 200px;
     max-width: 250px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+}
+
+.multiple-choice-img button img {
+    max-width: 100%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
 }
 
 .multiple-choice-img button:hover {
@@ -125,21 +135,26 @@ h1 {
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 153, 153, 0.4);
     text-decoration: none;
-    display: inline-block;
+    display: block;
     position: absolute;
     bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    margin: 0 auto;
 }
 
 .boton-escape:hover {
     background: linear-gradient(135deg, #ff8080, #ff9999);
-    transform: translateY(-2px);
+    transform: translateX(-50%) translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 153, 153, 0.5);
 }
 
 a {
     text-decoration: none;
-    display: flex;
-    justify-content: center;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 /* Responsive */
@@ -151,10 +166,11 @@ a {
     
     h1 {
         font-size: 2rem;
+        padding: 30px 20px;
     }
     
     .aplicacion {
-        padding: 30px 20px;
+        padding-top: 120px;
     }
     
     .multiple-choice-img {
@@ -162,8 +178,12 @@ a {
         gap: 12px;
     }
     
-    .multiple-choice button {
+    .multiple-choice-img button {
         min-width: auto;
+    }
+    
+    .boton-escape {
+        bottom: 30px;
     }
 }
 
@@ -174,17 +194,20 @@ a {
     
     h1 {
         font-size: 1.8rem;
-        margin-bottom: 20px;
+        padding: 25px 15px;
     }
     
     .aplicacion {
-        padding: 25px 15px;
-        margin-bottom: 20px;
+        padding-top: 100px;
     }
     
     .aplicacion h3 {
         font-size: 1.1rem;
         margin-bottom: 20px;
+    }
+    
+    .boton-escape {
+        bottom: 20px;
     }
 }
 
