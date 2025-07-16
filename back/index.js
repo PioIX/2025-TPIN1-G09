@@ -320,3 +320,14 @@ app.get('/respuestasPorPregunta', async function(req,res) {
         console.log(error)
     }
 })
+
+app.get('/preguntasLogos', async function(req,res) {
+    try {
+        const respuesta = await realizarQuery(`
+            SELECT * FROM Preguntas WHERE categoria = "logos"; 
+        `)
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error)
+    }
+})
