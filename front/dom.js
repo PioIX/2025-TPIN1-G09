@@ -73,7 +73,9 @@ class UserInterface {
         }
     }
 
-
+    getRespuestasLogos(){
+        return document.getElementById("inputLogos").value;
+    }
 
 
 }
