@@ -96,6 +96,56 @@ async function llenarPreguntaLogos() {
     contadorPreguntaLogos ++;
 }
 
+async function respuestaLogos() {
+    const response = await fetch(`http://localhost:4000/respuestasPorPregunta?id_pregunta=${idPreguntaLogos}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    
+    // Extraer los datos de la respuesta
+    const datosRespuesta = await response.json();
+    
+    // Encontrar la respuesta correcta y extraer solo el texto
+    const respuestaCorrecta = datosRespuesta.find(respuesta => respuesta.es_correcta === 1);
+    const textoRespuestaCorrecta = respuestaCorrecta ? respuestaCorrecta.texto : null;
+    
+    respuestaUsuario = ui.getRespuestasLogos()
+    
+    // Comparar con el texto de la respuesta correcta
+    if (textoRespuestaCorrecta === respuestaUsuario) {
+        document.getElementById("seccionJuegoLogos").innerHTML = `
+            <h3 id="preguntaLogos"></h3>
+            <img src="" alt="" id="imagenLogos">         
+            <div id="div_input_boton">
+                <input type="text" id="inputLogos">
+                <button class="boton-enviar" onclick="respuestaLogos()">Enviar</button>
+            </div>
+            <a href="categorias.html"><button class="boton-escape">Escape</button></a>
+        `
+        llenarPreguntaLogos()
+        puntaje += 1
+        console.log(puntaje)
+        alert("Puntaje: " + puntaje)
+    } else {
+        console.log("Respuesta correcta:", textoRespuestaCorrecta)
+        console.log("Respuesta usuario:", respuestaUsuario)
+        alert("Respuesta Incorrecta\nPuntaje: " + puntaje)
+        document.getElementById("seccionJuegoLogos").innerHTML = `
+            <h3 id="preguntaLogos"></h3>
+            <img src="" alt="" id="imagenLogos">         
+            <div id="div_input_boton">
+                <input type="text" id="inputLogos">
+                <button class="boton-enviar" onclick="respuestaLogos()">Enviar</button>
+            </div>
+            <a href="categorias.html"><button class="boton-escape">Escape</button></a>
+        `
+        llenarPreguntaLogos()
+        console.log(puntaje)
+    }
+}
+
 /**
  *  Tarea: Hacer funcion para la respuestade logos
  * Al presionar el boton 
@@ -141,8 +191,9 @@ function enviarRespuesta(es_correcta) {
         llenarPregunta()
         puntaje += 1
         console.log(puntaje)
+        alert("Puntaje: " + puntaje)
     } else {
-        alert("Respuesta Incorrecta")
+        alert("Respuesta Incorrecta\nPuntaje: " + puntaje)
         document.getElementById("seccionJuego").innerHTML = `
             <h3 id="preguntas"></h3>
             <div class="multiple-choice" id="respuestas">
@@ -156,3 +207,29 @@ function enviarRespuesta(es_correcta) {
     }
 }
 
+function enviarRespuestaAplicacion(es_correcta) {
+    if (es_correcta){
+        document.getElementById("seccionJuegoAplicacion").innerHTML = `
+            <h3 id="preguntasAplicacion"></h3>
+            <div class="multiple-choice-img" id="respuestasAplicacion">
+                
+            </div>
+            <a href="categorias.html"><button class="boton-escape">Escape</button></a>
+        `
+        llenarPreguntaAplicacion()
+        puntaje += 1
+        console.log(puntaje)
+        alert("Puntaje: " + puntaje)
+    } else {
+        alert("Respuesta Incorrecta\nPuntaje: " + puntaje)
+        document.getElementById("seccionJuegoAplicacion").innerHTML = `
+            <h3 id="preguntasAplicacion"></h3>
+            <div class="multiple-choice-img" id="respuestasAplicacion">
+                
+            </div>
+            <a href="categorias.html"><button class="boton-escape">Escape</button></a>
+        `
+        llenarPreguntaAplicacion()
+        console.log(puntaje)
+    }
+}

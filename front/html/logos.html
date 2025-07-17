@@ -9,70 +9,17 @@
 <body onload="obtenerPreguntasPorCategoria()">
     <main>
         <h1>Logos</h1>
-        <div class="logos">
+        <div class="logos" id="seccionJuegoLogos">
             <h3 id="preguntaLogos"></h3>
             <img src="" alt="" id="imagenLogos">         
-            <input type="text">
+            <div id="div_input_boton">
+                <input type="text" id="inputLogos">
+                <button class="boton-enviar" onclick="respuestaLogos()">Enviar</button>
+            </div>
             <a href="categorias.html"><button class="boton-escape">Escape</button></a>
         </div>
-        <!--
-
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="log-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-            <div class="logos">
-                <h3 id="glog-consigna"></h3>
-                <img src="" alt="">
-                <input type="text">
-                <a href="categorias.html"><button class="boton-escape">Escape</button></a>
-            </div>
-        -->
     </main>
     <script src="../preguntas.js"></script>
+    <script src="../dom.js"></script>
 </body>
 </html>
