@@ -60,8 +60,8 @@ class UserInterface {
     }
 
 
-    getIdPreguntaSelect() {
-        return document.getElementById("selectEliminar").value
+    getIdPreguntaEliminar() {
+        return document.getElementById("preguntaEliminar").value
     }
 
     getImagenesRespuestas(){
@@ -78,6 +78,13 @@ class UserInterface {
     }
 
 
+    getRespuestaCorrectaLogos() {
+        return document.getElementById("respuestaLogos").value
+    }
+
+    conseguirImagenLogos() {
+        return document.getElementById("imagenLogos").value
+    }
 }
 
 const ui = new UserInterface();

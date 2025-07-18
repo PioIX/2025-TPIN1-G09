@@ -177,7 +177,6 @@ function mostrarInputs() {
     let div = ''
     switch(valor) {
         case "Historia":
-            llenarSelectPreguntaEliminar();
             div += `
                 <label>Agregue una pregunta</label>
                 <input type="text" id="preguntaAgregar" placeholder="Escribe tu pregunta aquí">
@@ -201,7 +200,7 @@ function mostrarInputs() {
                 </div>
                 <button onclick="postPregunta()">Agregar pregunta</button>
                 <label>Elimine una pregunta</label>
-                <select id="selectEliminar"></select>
+                <input type="text" id="preguntaEliminar" placeholder="Escriba el ID de la pregunta aquí">
                 <button onclick="deletePregunta()">Eliminar pregunta</button>
             `;
             break;
@@ -229,14 +228,14 @@ function mostrarInputs() {
                 </div>
                 <button onclick="postPregunta()">Agregar pregunta</button>
                 <label>Elimine una pregunta</label>
-                <input type="text" placeholder="Escriba el ID de la pregunta aquí">
+                <input type="text" id="preguntaEliminar" placeholder="Escriba el ID de la pregunta aquí">
                 <button onclick="deletePregunta()">Eliminar pregunta</button>
             `;
             break;
         case "Aplicacion":
             div += `
                 <label>Agregue la URL de la imagen</label>
-                <input type="text" placeholder="Escribe la URL">
+                <input type="text" id="preguntaAgregar" placeholder="Escribe la URL">
                 <div class="input-group">
                     <label>Agregue la opción 1</label>
                     <input type="text" id="opcion1" placeholder="Opción 1">
@@ -255,21 +254,23 @@ function mostrarInputs() {
                     <input type="checkbox" id="check-opcion3">
                     <label for="check-opcion3">Activar</label>
                 </div>
-                <button onclick="postImagenAplicacion()">Agregar imagen</button>
+                <button onclick="postAplicacion()">Agregar imagen</button>
                 <label>Elimine una imagen</label>
-                <input type="text" placeholder="Escriba el ID de la imagen aquí">
-                <button onclick="deleteImagenAplicacion()">Eliminar imagen</button>
+                <input type="text" id="preguntaEliminar" placeholder="Escriba el ID de la imagen aquí">
+                <button onclick="deletePregunta()">Eliminar imagen</button>
             `;
             break;
         case "logos":
         default:
             div += `
                 <label>Agregue la URL de la imagen</label>
-                <input type="text">
-                <button onclick="postImagenLogos()">Agregar imagen</button>
+                <input type="text" id="preguntaAgregar">
+                <label>Escriba cual será la respuesta correcta </label>
+                <input type="text" id="respuestaLogos">
+                <button onclick="postLogos()">Agregar imagen</button>
                 <label>Elimine una imagen</label>
-                <input type="text" placeholder="Escriba el ID de la imagen aquí">
-                <button onclick="deleteImagenLogos()">Eliminar imagen</button>
+                <input type="text" id="preguntaEliminar" placeholder="Escriba el ID de la imagen aquí">
+                <button onclick="deletePregunta()">Eliminar imagen</button>
             `;
         }
 
@@ -313,15 +314,16 @@ async function datosRespuesta() {
 
     for (let i = 1; i <= 3; i++) {
         // ID del input de texto
-        let inputTexto = document.getElementById(`opcion${i === 1 ? "1" : i === 2 ? "2" : "3"}`);
+        let inputTextoURL = document.getElementById(`opcion${i === 1 ? "1" : i === 2 ? "2" : "3"}`);
         let inputCheckbox = document.getElementById(`check-opcion${i}`);
 
         // Validamos que haya algo escrito
-        if (inputTexto.value.trim() !== "") {
+        if (inputTextoURL.value.trim() !== "") {
             respuestas.push({
                 id_pregunta: id_pregunta,
+                texto: null,
                 es_correcta: inputCheckbox.checked,
-                texto: inputTexto.value.trim()
+                imagen: inputTextoURL.value.trim()
             });
         }
     }
@@ -361,7 +363,7 @@ async function postPregunta(){
 
           
 async function deletePregunta(){
-    let result = ui.getIdPreguntaSelect()
+    let result = ui.getIdPreguntaEliminar()
     console.log(result)
     const response = await fetch(`http://localhost:4000/EliminarPregunta`, {
         method: "DELETE", //GET, POST, PUT o DELETE
@@ -385,7 +387,7 @@ async function conseguirPregunta(){
     return result
 }
 
-async function llenarSelectPreguntaEliminar() {
+/*async function llenarSelectPreguntaEliminar() {
     let preguntas = await conseguirPregunta()
     console.log(preguntas)
     let selectPregunta = ``
@@ -396,9 +398,73 @@ async function llenarSelectPreguntaEliminar() {
     }
 
     document.getElementById("selectEliminar").innerHTML += selectPregunta
-}
+}*/
 
 function redirigirCategoria(categoria) {
     localStorage.setItem("categoria", categoria);
     location.href = categoria + ".html"
+}
+
+
+async function postAplicacion() {
+    let datos = await datosPregunta()
+    console.log(datos)
+    const response = await fetch(`http://localhost:4000/subirPregunta`, {
+        method: "POST", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos)
+    })
+    let result = await response.json()
+    console.log(result)
+    let respuestas = await datosRespuesta()
+    for (let respuesta of respuestas) {
+            const responde = await fetch("http://localhost:4000/subirRespuestaImagen", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(respuesta)
+            });
+    
+            let result = await responde.json();
+            console.log("Respuesta subida:", result);
+
+        }
+}
+
+async function postLogos() {
+    let datos = await datosPregunta()
+    console.log(datos)
+    const response = await fetch(`http://localhost:4000/subirPregunta`, {
+        method: "POST", //GET, POST, PUT o DELETE
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos)
+    })
+    let result = await response.json()
+    console.log(result)
+    let pregunta = ui.getPregunta()
+    let respuestaCorrecta = ui.getRespuestaCorrectaLogos()
+    let id_pregunta = await conseguirIdPregunta(pregunta)
+    let datosRespuesta = {
+        texto: respuestaCorrecta,
+        es_correcta: null,
+        id_pregunta: id_pregunta,
+        imagen: null
+    }
+
+    const responde = await fetch("http://localhost:4000/subirRespuestaLogos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datosRespuesta)
+            });
+    
+            let resultado = await responde.json();
+            console.log("Respuesta subida:", resultado);
+
 }
