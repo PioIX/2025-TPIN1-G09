@@ -285,6 +285,30 @@ app.post('/subirRespuesta', async function(req,res){
     }
 })
 
+app.post('/subirRespuestaLogos', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Respuestas (texto, es_correcta, id_pregunta,imagen)
+            VALUES ('${req.body.texto}',${req.body.es_correcta},${req.body.id_pregunta},${req.body.imagen})
+        `)
+        res.send({mensaje: "Se insertó las imagen"})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.post('/subirRespuestaImagen', async function(req,res){
+    try {
+        const respuesta = await realizarQuery(`
+            INSERT INTO Respuestas (texto, es_correcta, id_pregunta,imagen)
+            VALUES (${req.body.texto},${req.body.es_correcta},${req.body.id_pregunta},'${req.body.imagen}')
+        `)
+        res.send({mensaje: "Se insertó las imagen"})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 app.get('/preguntas', async function(req, res){
     try {
         console.log(req.query);
